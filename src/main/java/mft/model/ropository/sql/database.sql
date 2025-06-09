@@ -1,0 +1,108 @@
+-- حذف نما در صورت وجود
+BEGIN
+EXECUTE IMMEDIATE 'DROP VIEW TRANSACTION_REPORT';
+EXCEPTION
+    WHEN OTHERS THEN
+        IF SQLCODE != -942 THEN
+            RAISE;
+END IF;
+END;
+/
+
+-- حذف جداول در صورت وجود
+BEGIN
+EXECUTE IMMEDIATE 'DROP TABLE ACCOUNTINFO';
+EXCEPTION
+    WHEN OTHERS THEN
+        IF SQLCODE != -942 THEN
+            RAISE;
+END IF;
+END;
+/
+
+BEGIN
+EXECUTE IMMEDIATE 'DROP TABLE PERSON';
+EXCEPTION
+    WHEN OTHERS THEN
+        IF SQLCODE != -942 THEN
+            RAISE;
+END IF;
+END;
+/
+
+-- حذف توالی‌ها در صورت وجود
+BEGIN
+EXECUTE IMMEDIATE 'DROP SEQUENCE PERSON_SEQ';
+EXCEPTION
+    WHEN OTHERS THEN
+        IF SQLCODE != -2289 THEN
+            RAISE;
+END IF;
+END;
+/
+
+BEGIN
+EXECUTE IMMEDIATE 'DROP SEQUENCE TRANSACTION_SEQ';
+EXCEPTION
+    WHEN OTHERS THEN
+        IF SQLCODE != -2289 THEN
+            RAISE;
+END IF;
+END;
+/
+
+-- ساخت جدول PERSON
+CREATE TABLE PERSON (
+                        ID           NUMBER PRIMARY KEY,
+                        NAME         NVARCHAR2(30),
+                        FAMILY       NVARCHAR2(30),
+                        USERNAME     NVARCHAR2(20) UNIQUE NOT NULL,
+                        PASSWORD     NVARCHAR2(20),
+                        BIRTH_DATE   DATE,
+                        PHONE_NUMBER NVARCHAR2(15)
+);
+
+-- ساخت توالی برای PERSON
+CREATE SEQUENCE PERSON_SEQ START WITH 1 INCREMENT BY 1;
+
+-- ساخت جدول ACCOUNTINFO
+CREATE TABLE ACCOUNTINFO (
+                             ID               NUMBER PRIMARY KEY,
+                             PERSON_ID        NUMBER NOT NULL,
+                             AMOUNT           NUMBER,
+                             TRANSACTION_TYPE VARCHAR2(7),
+                             DATE_TIME        TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+                             CONSTRAINT FK_ACCOUNTINFO_PERSON FOREIGN KEY (PERSON_ID) REFERENCES PERSON(ID)
+);
+
+-- ساخت توالی برای ACCOUNTINFO
+CREATE SEQUENCE TRANSACTION_SEQ START WITH 1 INCREMENT BY 1;
+
+-- ساخت نمای گزارش تراکنش
+CREATE VIEW TRANSACTION_REPORT AS
+SELECT
+    T.ID              AS TRANSACTION_ID,
+    P.ID              AS PERSON_ID,
+    P.NAME,
+    P.FAMILY,
+    P.USERNAME,
+    P.PASSWORD,
+    P.BIRTH_DATE,
+    P.PHONE_NUMBER,
+    T.AMOUNT,
+    T.TRANSACTION_TYPE,
+    T.DATE_TIME       AS TRANSACTION_DATE_TIME
+FROM ACCOUNTINFO T
+         JOIN PERSON P ON T.PERSON_ID = P.ID;
+
+-- درج داده تستی در PERSON
+INSERT INTO PERSON (ID, NAME, FAMILY, USERNAME, PASSWORD, BIRTH_DATE, PHONE_NUMBER)
+VALUES (PERSON_SEQ.NEXTVAL, 'Ali', 'Ahmadi', 'ali123', 'pass123', DATE '1990-01-01', '09123456789');
+
+-- درج داده تستی در ACCOUNTINFO
+INSERT INTO ACCOUNTINFO (ID, PERSON_ID, AMOUNT, TRANSACTION_TYPE)
+VALUES (TRANSACTION_SEQ.NEXTVAL, 1, 500000, 'credit');
+
+-- نمایش گزارش تراکنش‌ها
+SELECT * FROM TRANSACTION_REPORT;
