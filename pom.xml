@@ -59,8 +59,6 @@
             <artifactId>persian-date-time</artifactId>
             <version>4.2.0</version>
         </dependency>
-
-
     </dependencies>
 
     <build>
@@ -70,6 +68,4 @@
             </resource>
         </resources>
     </build>
-
-
 </project>
