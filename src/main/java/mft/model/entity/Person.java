@@ -17,5 +17,5 @@ public class Person {
     private String username;
     private String password;
     private LocalDate birthDate;
-    private String phone_number;
+    private String phoneNumber;
 }

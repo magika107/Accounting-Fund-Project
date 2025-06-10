@@ -34,10 +34,9 @@ public class PersonRepository implements AutoCloseable {
         preparedStatement.setString(4, person.getUsername());
         preparedStatement.setString(5, person.getPassword());
         preparedStatement.setDate(6, java.sql.Date.valueOf(person.getBirthDate()));
-        preparedStatement.setString(7, person.getPhone_number());
+        preparedStatement.setString(7, person.getPhoneNumber());
         preparedStatement.execute();
     }
-
 
     public void edit(Person person) throws SQLException {
         preparedStatement = connection.prepareStatement(
@@ -48,7 +47,7 @@ public class PersonRepository implements AutoCloseable {
         preparedStatement.setString(3, person.getUsername());
         preparedStatement.setString(4, person.getPassword());
         preparedStatement.setDate(5, java.sql.Date.valueOf(person.getBirthDate()));
-        preparedStatement.setString(6, person.getPhone_number());
+        preparedStatement.setString(6, person.getPhoneNumber());
         preparedStatement.setInt(7, person.getId());
         preparedStatement.execute();
     }
@@ -106,6 +105,9 @@ public class PersonRepository implements AutoCloseable {
 
     @Override
     public void close() throws Exception {
-
+        if (preparedStatement != null) {
+            preparedStatement.close();
+        }
+        connection.close();
     }
 }

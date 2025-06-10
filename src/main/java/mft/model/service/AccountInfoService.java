@@ -1,4 +1,4 @@
-package mft.service;
+package mft.model.service;
 
 import mft.model.entity.AccountInfo;
 import mft.model.ropository.AccountInfoRepository;
@@ -41,6 +41,7 @@ public class AccountInfoService {
             return repository.findByPersonId(personId);
         }
     }
+//    todo : findByPersonNameAndFamily, findByTransactionType, findByDate(startDateTime, endDateTime)
 
 }
 

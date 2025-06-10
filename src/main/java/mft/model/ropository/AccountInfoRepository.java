@@ -12,7 +12,6 @@ public class AccountInfoRepository implements AutoCloseable {
     private Connection connection;
     private PreparedStatement preparedStatement;
 
-
     public AccountInfoRepository() throws SQLException {
         connection = ConnectionProvider.getConnectionProvider().getConnection();
     }
@@ -27,7 +26,7 @@ public class AccountInfoRepository implements AutoCloseable {
                 "INSERT INTO accountinfo (id, person_id, amount, transaction_type, date_time) VALUES (?, ?, ?, ?, ?)"
         );
         preparedStatement.setInt(1, accountInfo.getId());
-        preparedStatement.setInt(2, accountInfo.getPersonId());
+        preparedStatement.setInt(2, accountInfo.getPerson().getId());
         preparedStatement.setInt(3, accountInfo.getAmount());
         preparedStatement.setString(4, accountInfo.getTransactionType().name());
         preparedStatement.setTimestamp(5, Timestamp.valueOf(accountInfo.getDateTime()));
@@ -35,12 +34,11 @@ public class AccountInfoRepository implements AutoCloseable {
 
     }
 
-
     public void edit(AccountInfo accountInfo) throws SQLException {
         preparedStatement = connection.prepareStatement(
                 "UPDATE accountinfo SET person_id = ?, amount = ?, transaction_type = ?, date_time = ? WHERE id = ?"
         );
-        preparedStatement.setInt(1, accountInfo.getPersonId());
+        preparedStatement.setInt(1, accountInfo.getPerson().getId());
         preparedStatement.setInt(2, accountInfo.getAmount());
         preparedStatement.setString(3, accountInfo.getTransactionType().name());
         preparedStatement.setTimestamp(4, Timestamp.valueOf(accountInfo.getDateTime()));
@@ -101,6 +99,7 @@ public class AccountInfoRepository implements AutoCloseable {
         return accountList;
     }
 
+//    todo : findByPersonNameAndFamily, findByTransactionType, findByDate(startDateTime, endDateTime)
 
     @Override
     public void close() throws Exception {

@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 
 public class AccountInfo {
     private int id;
-    private int personId;
+    private Person person;
     private int amount;
     private TransactionType transactionType;
     private LocalDateTime dateTime;
