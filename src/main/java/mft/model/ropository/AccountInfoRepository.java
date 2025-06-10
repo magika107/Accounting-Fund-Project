@@ -57,7 +57,7 @@ public class AccountInfoRepository implements AutoCloseable {
     public List<AccountInfo> findAll() throws SQLException {
         List<AccountInfo> accountList = new ArrayList<>();
         connection = ConnectionProvider.getConnectionProvider().getConnection();
-        preparedStatement = connection.prepareStatement("SELECT * FROM accountinfo");
+        preparedStatement = connection.prepareStatement("SELECT * FROM TRANSACTION_REPORT");
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
             accountList.add(EntityMapper.accountInfoMapper(resultSet));
@@ -70,7 +70,7 @@ public class AccountInfoRepository implements AutoCloseable {
     public AccountInfo findById(int id) throws SQLException {
         AccountInfo accountInfo = null;
         connection = ConnectionProvider.getConnectionProvider().getConnection();
-        preparedStatement = connection.prepareStatement("SELECT * FROM accountinfo WHERE id = ?");
+        preparedStatement = connection.prepareStatement("SELECT * FROM TRANSACTION_REPORT WHERE id = ?");
         preparedStatement.setInt(1, id);
         ResultSet resultSet = preparedStatement.executeQuery();
         if (resultSet.next()) {
@@ -85,7 +85,7 @@ public class AccountInfoRepository implements AutoCloseable {
         List<AccountInfo> accountList = new ArrayList<>();
         connection = ConnectionProvider.getConnectionProvider().getConnection();
         preparedStatement = connection.prepareStatement(
-                "SELECT * FROM accountinfo WHERE person_id = ?"
+                "SELECT * FROM TRANSACTION_REPORT WHERE person_id = ?"
         );
         preparedStatement.setInt(1, personId);
 

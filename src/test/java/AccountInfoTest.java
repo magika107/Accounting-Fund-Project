@@ -1,6 +1,6 @@
 import mft.model.entity.AccountInfo;
 import mft.model.entity.TransactionType;
-import mft.service.AccountInfoService;
+import mft.model.service.AccountInfoService;
 
 import java.time.LocalDateTime;
 
@@ -17,7 +17,7 @@ public class AccountInfoTest {
                 .dateTime(LocalDateTime.now())
                 .build();
 
-        AccountInfoService.save(accountInfo);
+//        AccountInfoService.save(accountInfo);
 
         System.out.println(AccountInfoService.findAll());
     }

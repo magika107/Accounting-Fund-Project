@@ -24,13 +24,24 @@ public class EntityMapper {
 
 
     public static AccountInfo accountInfoMapper(ResultSet resultSet) throws SQLException {
+            Person person = Person
+                    .builder()
+                    .id(resultSet.getInt("PERSON_ID"))
+                    .name(resultSet.getString("NAME"))
+                    .family(resultSet.getString("FAMILY"))
+                    .username(resultSet.getString("USERNAME"))
+                    .password(resultSet.getString("PASSWORD"))
+                    .birthDate(resultSet.getDate("birth_date") == null ? null : resultSet.getDate("birth_date").toLocalDate())
+                    .phoneNumber(resultSet.getString("PHONE_NUMBER"))
+                    .build();
+
         return AccountInfo
                 .builder()
-                .id(resultSet.getInt("ID"))
-//                .person.setId(resultSet.getInt("PERSON_ID"))
+                .id(resultSet.getInt("TRANSACTION_ID"))
+                .person(person)
                 .amount(resultSet.getInt("AMOUNT"))
                 .transactionType(TransactionType.valueOf(resultSet.getString("TRANSACTION_TYPE")))
-                .dateTime(resultSet.getTimestamp("DATE_TIME").toLocalDateTime())
+                .dateTime(resultSet.getTimestamp("TRANSACTION_DATE_TIME").toLocalDateTime())
                 .build();
     }
 
