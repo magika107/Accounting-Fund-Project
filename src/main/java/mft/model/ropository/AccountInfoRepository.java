@@ -74,7 +74,7 @@ public class AccountInfoRepository implements AutoCloseable {
     public AccountInfo findById(int id) throws SQLException {
         AccountInfo accountInfo = null;
         connection = ConnectionProvider.getConnectionProvider().getConnection();
-        preparedStatement = connection.prepareStatement("SELECT * FROM TRANSACTION_REPORT WHERE id = ?");
+        preparedStatement = connection.prepareStatement("SELECT * FROM TRANSACTION_REPORT WHERE transaction_id = ?");
         preparedStatement.setInt(1, id);
         ResultSet resultSet = preparedStatement.executeQuery();
         if (resultSet.next()) {

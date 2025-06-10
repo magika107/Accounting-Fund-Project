@@ -46,7 +46,7 @@ public class AccountInfoService {
         }
     }
 
-    public static List<AccountInfo> findByPersonId(TransactionType transactionType) throws Exception {
+    public static List<AccountInfo> findByTransactionType(TransactionType transactionType) throws Exception {
         try (AccountInfoRepository repository = new AccountInfoRepository()) {
             return repository.findByTransactionType(transactionType);
         }
