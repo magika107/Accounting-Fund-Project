@@ -18,7 +18,7 @@ public class EntityMapper {
                     .username(resultSet.getString("USERNAME"))
                     .password(resultSet.getString("PASSWORD"))
                     .birthDate(resultSet.getDate("BIRTH_DATE") == null ? null : resultSet.getDate("BIRTH_DATE").toLocalDate())
-                    .phone_number(resultSet.getString("PHONE_NUMBER"))
+                    .phoneNumber(resultSet.getString("PHONE_NUMBER"))
                     .build();
         }
 
@@ -27,7 +27,7 @@ public class EntityMapper {
         return AccountInfo
                 .builder()
                 .id(resultSet.getInt("ID"))
-                .personId(resultSet.getInt("PERSON_ID"))
+//                .person.setId(resultSet.getInt("PERSON_ID"))
                 .amount(resultSet.getInt("AMOUNT"))
                 .transactionType(TransactionType.valueOf(resultSet.getString("TRANSACTION_TYPE")))
                 .dateTime(resultSet.getTimestamp("DATE_TIME").toLocalDateTime())
