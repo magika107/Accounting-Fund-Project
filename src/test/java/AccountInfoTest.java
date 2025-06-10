@@ -10,7 +10,8 @@ public class AccountInfoTest {
     public static void main(String[] args) throws Exception {
         AccountInfo accountInfo = AccountInfo
                 .builder()
-                .personId(1)
+                //.id(1234)
+               // .personId(19)
                 .amount(100000)
                 .transactionType(TransactionType.receipt)
                 .dateTime(LocalDateTime.now())

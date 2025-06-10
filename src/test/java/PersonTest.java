@@ -16,6 +16,7 @@ public class PersonTest {
 
 //        PersonService.save(person);
         System.out.println(PersonServise.findAll());
+        System.out.println(PersonServise.findById(person.getId()));
     }
 
 }
