@@ -8,7 +8,7 @@ public class PersonServiceTest {
     public static void main(String[] args) throws Exception {
         Person person = Person
                 .builder()
-                .id(7)
+                .id(2)
                 .name("reza")
                 .family("rezaii")
                 .username("reza")
@@ -17,11 +17,12 @@ public class PersonServiceTest {
                 .birthDate(LocalDate.of(2000, 1, 1))
                 .build();
 
-//        PersonService.save(person);
+        PersonService.save(person);
 //        PersonService.edit(person);
-        PersonService.delete(1);
-        System.out.println(PersonService.findAll());
-        System.out.println(PersonService.findById(7));
+//        PersonService.delete(1);
+//        System.out.println(PersonService.findAll());
+//        System.out.println(PersonService.findById(7));
+        System.out.println(PersonService.findByNameAndFamily("r", "r"));
     }
 
 }
