@@ -8,8 +8,8 @@ public class PersonServiceTest {
     public static void main(String[] args) throws Exception {
         Person person = Person
                 .builder()
-                .id(2)
-                .name("reza")
+                .id(5)
+                .name("")
                 .family("rezaii")
                 .username("reza")
                 .password("reza123")

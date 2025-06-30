@@ -3,8 +3,6 @@ package mft.model.entity;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
-
-import javax.naming.Name;
 import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor

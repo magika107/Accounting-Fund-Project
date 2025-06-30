@@ -1,5 +1,8 @@
 package mft.model.ropository;
 
+import lombok.extern.log4j.Log4j2;
+import mft.controller.exceptions.UserNotFoundException;
+import mft.controller.exceptions.InvalidPersonDataException;
 import mft.model.entity.Person;
 import mft.tools.ConnectionProvider;
 import mft.tools.EntityMapper;
@@ -10,6 +13,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+@Log4j2
 
 public class PersonRepository implements AutoCloseable {
     private Connection connection;
@@ -101,6 +106,35 @@ public class PersonRepository implements AutoCloseable {
         resultSet.close();
         preparedStatement.close();
         return personList;
+    }
+
+    public Person login(String username, String password) throws UserNotFoundException, SQLException, InvalidPersonDataException {
+        Person person = null;
+        connection = ConnectionProvider.getConnectionProvider().getConnection();
+        preparedStatement = connection.prepareStatement("SELECT * FROM PERSON WHERE USERNAME = ? AND PASSWORD = ?");
+        preparedStatement.setString(1, username);
+        preparedStatement.setString(2, password);
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        if (resultSet.next()) {
+            person = Person.builder()
+                    .id(resultSet.getInt("id"))
+                    .name(resultSet.getString("name"))
+                    .family(resultSet.getString("family"))
+                    .username(resultSet.getString("username"))
+                    .password(resultSet.getString("password"))
+                    .birthDate(resultSet.getDate("birth_date").toLocalDate())
+                    .phoneNumber(resultSet.getString("phone_number"))
+                    .build();
+        }
+
+        if (person == null) {
+            log.error("Login - No User With username/password " + username + ":" + password);
+            throw new UserNotFoundException("No User With username/password");
+        }
+
+        log.info("Login " + person);
+        return person;
     }
 
     @Override
