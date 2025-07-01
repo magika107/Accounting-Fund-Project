@@ -3,6 +3,7 @@ package mft;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 import lombok.extern.log4j.Log4j2;
 
@@ -22,11 +23,9 @@ public class MainApp extends Application {
             log.info("Application started successfully");
 
         } catch (Exception e) {
-            log.error("Failed to start application", e);
+            Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
+            log.error("Failed to start application");
         }
     }
 
-    public static void main(String[] args) {
-        launch(args);
-    }
 }

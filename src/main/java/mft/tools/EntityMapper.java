@@ -12,7 +12,7 @@ public class EntityMapper {
 
         public static Person personMapper(ResultSet resultSet) throws SQLException {
             return Person.builder()
-                    .id(resultSet.getInt("TRANSACTION_ID"))
+                    .id(resultSet.getInt("ID"))
                     .name(resultSet.getString("NAME"))
                     .family(resultSet.getString("FAMILY"))
                     .username(resultSet.getString("USERNAME"))

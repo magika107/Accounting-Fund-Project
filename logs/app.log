@@ -161,3 +161,25 @@ java.lang.NullPointerException: Location is required.
 2025-07-01 03:00:09.457 [JavaFX Application Thread] ERROR mft.controller.PersonController - Person Creation Error: ORA-02289: sequence does not exist
 
 2025-07-01 03:00:28.704 [JavaFX Application Thread] ERROR mft.controller.AccountViewController - Save error: For input string: "sdfas"
+2025-07-01 10:57:07.668 [JavaFX Application Thread] INFO  mft.MainApp - Application started successfully
+2025-07-01 10:57:49.933 [JavaFX Application Thread] INFO  mft.model.ropository.PersonRepository - Login Person(id=1, name=Reza, family=Mohammadi, username=reza456, password=pass456, birthDate=1992-02-02, phoneNumber=09998887766)
+2025-07-01 10:57:50.273 [JavaFX Application Thread] ERROR mft.controller.PersonController - Form Reset Error: ORA-17006: Invalid column name
+2025-07-01 10:57:50.334 [JavaFX Application Thread] ERROR mft.controller.PersonController - Error loading person list: ORA-17006: Invalid column name
+2025-07-01 10:57:50.428 [JavaFX Application Thread] ERROR mft.controller.AccountViewController - Clear form error: ORA-00942: table or view does not exist
+
+2025-07-01 10:57:50.485 [JavaFX Application Thread] ERROR mft.controller.AccountViewController - Error loading account list: ORA-00942: table or view does not exist
+
+2025-07-01 11:17:10.330 [JavaFX Application Thread] INFO  mft.MainApp - Application started successfully
+2025-07-01 11:17:44.384 [JavaFX Application Thread] INFO  mft.model.ropository.PersonRepository - Login Person(id=1, name=Reza, family=Mohammadi, username=reza456, password=pass456, birthDate=1992-02-02, phoneNumber=09998887766)
+2025-07-01 11:17:44.831 [JavaFX Application Thread] ERROR mft.controller.AccountViewController - Clear form error: ORA-00942: table or view does not exist
+
+2025-07-01 11:17:44.877 [JavaFX Application Thread] ERROR mft.controller.AccountViewController - Error loading account list: ORA-00942: table or view does not exist
+
+2025-07-01 11:46:21.093 [JavaFX Application Thread] INFO  mft.MainApp - Application started successfully
+2025-07-01 11:46:37.898 [JavaFX Application Thread] INFO  mft.model.ropository.PersonRepository - Login Person(id=1, name=Reza, family=Mohammadi, username=reza456, password=pass456, birthDate=1992-02-02, phoneNumber=09998887766)
+2025-07-01 11:46:38.366 [JavaFX Application Thread] ERROR mft.controller.AccountViewController - Clear form error: No enum constant mft.model.entity.TransactionType.credit
+2025-07-01 11:46:38.430 [JavaFX Application Thread] ERROR mft.controller.AccountViewController - Error loading account list: No enum constant mft.model.entity.TransactionType.credit
+2025-07-01 11:47:02.623 [JavaFX Application Thread] INFO  mft.controller.PersonController - Person Deleted Successfully: 2
+2025-07-01 12:06:03.235 [JavaFX Application Thread] INFO  mft.MainApp - Application started successfully
+2025-07-01 12:06:34.256 [JavaFX Application Thread] ERROR mft.model.ropository.PersonRepository - Login - No User With username/password ali123:pass123
+2025-07-01 12:06:46.817 [JavaFX Application Thread] ERROR mft.model.ropository.PersonRepository - Login - No User With username/password ali123:pass123

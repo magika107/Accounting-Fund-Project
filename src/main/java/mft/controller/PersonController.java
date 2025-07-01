@@ -42,7 +42,7 @@ public class PersonController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         resetForm();
 
-        saveBtn.setOnMouseClicked(event -> {
+        saveBtn.setOnAction(event -> {
             try {
                 Person person = Person.builder()
                         .name(nameTxt.getText())
@@ -98,14 +98,18 @@ public class PersonController implements Initializable {
 
         removeBtn.setOnAction(event -> {
             try {
-                int id = Integer.parseInt(idTxt.getText());
-                PersonService.delete(id);
+                Alert confirm = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure?", ButtonType.YES, ButtonType.NO);
+                if (confirm.showAndWait().get() == ButtonType.YES) {
 
-                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Person Removed Successfully", ButtonType.OK);
-                alert.show();
-                resetForm();
-                log.info("Person Deleted Successfully: " + id);
 
+                    int id = Integer.parseInt(idTxt.getText());
+                    PersonService.delete(id);
+
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION, "Person Removed Successfully", ButtonType.OK);
+                    alert.show();
+                    resetForm();
+                    log.info("Person Deleted Successfully: " + id);
+                }
             } catch (PersonNotFoundException pnfe) {
                 Alert alert = new Alert(Alert.AlertType.WARNING, "Person not found", ButtonType.OK);
                 alert.show();
@@ -167,7 +171,7 @@ public class PersonController implements Initializable {
             personList = PersonService.findAll();
             showPersonOnTable(personList);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.error("Form Reset Error: " + e.getMessage());
         }
     }
 
